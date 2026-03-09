@@ -1,41 +1,45 @@
 import java.util.Scanner;
 
+// Main Application Class
 public class PalindroneCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("=== Palindrome Checker App (OOP Version) ===");
 
-        System.out.println("=== UC10 : Case-Insensitive & Space-Ignored Palindrome ===");
-        System.out.print("Enter a sentence: ");
+        System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        // STEP 1: Normalize string
-        // remove spaces & special characters + convert to lowercase
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        // Create object of service class
+        PalindromeService service = new PalindromeService();
 
-        // STEP 2: Apply palindrome logic (two-pointer)
-        boolean isPalindrome = true;
+        boolean result = service.checkPalindrome(input);
+
+        if (result)
+            System.out.println("Result: Palindrome");
+        else
+            System.out.println("Result: Not a Palindrome");
+    }
+}
+
+// Service class containing palindrome logic
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        // remove spaces + ignore case
+        input = input.replaceAll("\\s+", "").toLowerCase();
+
         int start = 0;
-        int end = normalized.length() - 1;
+        int end = input.length() - 1;
 
         while (start < end) {
-            if (normalized.charAt(start) != normalized.charAt(end)) {
-                isPalindrome = false;
-                break;
-            }
+            if (input.charAt(start) != input.charAt(end))
+                return false;
             start++;
             end--;
         }
-
-        // STEP 3: Output result
-        System.out.println("Normalized string: " + normalized);
-
-        if (isPalindrome)
-            System.out.println("Result: Palindrome ✅");
-        else
-            System.out.println("Result: NOT Palindrome ❌");
-
-        sc.close();
+        return true;
     }
 }
