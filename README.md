@@ -143,4 +143,4 @@ This demonstrates real-world Git workflow.
 ---
 
 ## 👩‍💻 Author
-**Sameeksha Khurpe**
+**Farjan Alam**
